@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Speaker Details - TheEvent</title>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <link href="{% static 'img/favicon.png' %}" rel="icon">
+  <link href="{% static 'lib/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'lib/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet">
+  <link href="{% static 'css/style.css' %}" rel="stylesheet">
+</head>
+<body>
+  <section id="speakers-details">
+    <div class="container">
+      <div class="section-header">
+        <h2>Speaker Details</h2>
+        <p>{{ speaker.bio|truncatewords:20 }}</p>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6"><img src="{% if speaker.profile %}{{ speaker.profile.url }}{% else %}{% static 'img/speakers/default.jpg' %}{% endif %}" 
+     alt="{{ speaker.name }}" 
+     class="img-fluid">
+        </div>
+
+        <div class="col-md-6">
+          <div class="details">
+            <h2>{{ speaker.name }}</h2>
+            <div class="social">
+              {% if speaker.twitter %}
+                <a href="{{ speaker.twitter }}"><i class="fa fa-twitter"></i></a>
+              {% endif %}
+              {% if speaker.facebook %}
+                <a href="{{ speaker.facebook }}"><i class="fa fa-facebook"></i></a>
+              {% endif %}
+              {% if speaker.instagram %}
+                <a href="{{ speaker.instagram }}"><i class="fa fa-instagram"></i></a>
+              {% endif %}
+              {% if speaker.linkedin %}
+                <a href="{{ speaker.linkedin }}"><i class="fa fa-linkedin"></i></a>
+              {% endif %}
+            </div>
+            <p>{{ speaker.bio }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</body>
+</html>
