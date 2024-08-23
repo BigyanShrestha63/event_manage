@@ -1,0 +1,47 @@
+{% extends 'base.html '%}
+{% load static %}
+{% block content %}
+
+
+<!--==========================
+   Speakers Section
+ ============================-->
+ <section id="speakers">
+    <div class="container">
+      <div class="section-header">
+        <br>
+        <h2>Event Speakers</h2>
+        <p>Here are some of our speakers</p>
+      </div>
+      <div class="row">
+        {% for speaker in speakers %}
+        <div class="col-lg-4 col-md-6">
+          <div class="speaker">
+            <img src="{% if speaker.profile %}{{ speaker.profile.url }}{% else %}{% static 'img/speakers/default.jpg' %}{% endif %}" 
+       alt="{{ speaker.name }}" 
+       class="img-fluid">
+            <div class="details">
+              <h3><a href="{% url 'speaker_details' speaker.id %}">{{ speaker.name }}</a></h3>
+              <p>{{ speaker.profession }}</p>
+              <div class="social">
+                {% if speaker.twitter %}
+                  <a href="{{ speaker.twitter }}"><i class="fa fa-twitter"></i></a>
+                {% endif %}
+                {% if speaker.facebook %}
+                  <a href="{{ speaker.facebook }}"><i class="fa fa-facebook"></i></a>
+                {% endif %}
+                {% if speaker.instagram %}
+                  <a href="{{ speaker.instagram }}"><i class="fa fa-instagram"></i></a>
+                {% endif %}
+                {% if speaker.linkedin %}
+                  <a href="{{ speaker.linkedin }}"><i class="fa fa-linkedin"></i></a>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section> 
+  {% endblock %}

@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<!-- Buy Ticket Section -->
+<section id="buy-tickets" class="section-with-bg">
+    <!-- Modal Order Form -->
+    <div id="buy-ticket-modal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Buy Tickets</h4>
+                   
+                        <a href="{% url 'ticket' %}"  class="close" aria-label="Close"></a>
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" action="{% url 'buy_ticket' %}">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <div class="text-center">
+                            <button type="submit" class="btn">Buy Now</button>
+                        </div>
+                    </form>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+</section>
+
+{% endblock %}
