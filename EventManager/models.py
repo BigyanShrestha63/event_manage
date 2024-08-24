@@ -28,4 +28,14 @@ class TicketPurchase(models.Model):
 
     def __str__(self):
         return f'{self.name} - {self.ticket_type}'
+    
+class GalleryImage(models.Model):
+    title = models.CharField(max_length=100,blank="true")
+    image = models.ImageField(upload_to='gallery/')
+    description = models.CharField(max_length=255, blank=True)
+    uploaded_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.description if self.description else f"Image {self.id}"
+    
 

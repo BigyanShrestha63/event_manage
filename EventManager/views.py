@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from .models import *
 from .forms import *
+from django.contrib.auth.decorators import login_required
 
 def home(request):
     return render(request, 'home.html')
@@ -12,10 +13,20 @@ def contact(request):
     return render(request, 'contact.html',{})
 
 def venue(request):
-    return render(request, 'venue.html',{})
+    return render(request, 'venue.html', {})
 
 def gallery(request):
-    return render(request, 'gallery.html',{})
+    if request.method == 'POST':
+        form = GalleryImageForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return render(request, 'gallery.html',{})
+    else:
+        form = GalleryImageForm()
+
+    images = GalleryImage.objects.all()
+    return render(request, 'gallery.html', {'form': form, 'images': images})
+
 
 def speakers(request):
     speakers = Speaker.objects.all()
@@ -51,5 +62,9 @@ def buy_ticket(request):
 
 def success(request):
     return render(request, 'success.html',{})
+
+
+
+
 
 

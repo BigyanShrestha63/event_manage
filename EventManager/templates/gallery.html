@@ -1,34 +1,45 @@
-{% extends 'base.html '%}
+{% extends 'base.html' %}
 {% load static %}
 {% block content %}
 
-
-
-
-<!--==========================
-       Gallery Section
-     ============================-->
-     <section id="gallery">
- 
-        <div class="container">
-          <div class="section-header">
+<!-- Gallery Section -->
+<section id="gallery">
+    <div class="container">
+        <div class="section-header">
             <br>
             <h2>Gallery</h2>
             <p>Check our gallery from the recent events</p>
-          </div>
         </div>
-  
+
         <div class="owl-carousel gallery-carousel">
-          <a href="img/gallery/1.jpg" class="venobox" data-gall="gallery-carousel"><img src="{% static 'img/gallery/1.jpg' %}" alt=""></a>
-          <a href="img/gallery/2.jpg" class="venobox" data-gall="gallery-carousel"><img src="{% static 'img/gallery/2.jpg' %}" alt=""></a>
-          <a href="img/gallery/3.jpg" class="venobox" data-gall="gallery-carousel"><img src="{% static 'img/gallery/3.jpg' %}" alt=""></a>
-          <a href="img/gallery/4.jpg" class="venobox" data-gall="gallery-carousel"><img src="{% static 'img/gallery/4.jpg' %}" alt=""></a>
-          <a href="img/gallery/5.jpg" class="venobox" data-gall="gallery-carousel"><img src="{% static 'img/gallery/5.jpg' %}" alt=""></a>
-          <a href="img/gallery/6.jpg" class="venobox" data-gall="gallery-carousel"><img src="{% static 'img/gallery/6.jpg' %}" alt=""></a>
-          <a href="img/gallery/7.jpg" class="venobox" data-gall="gallery-carousel"><img src="{% static 'img/gallery/7.jpg' %}" alt=""></a>
-          <a href="img/gallery/8.jpg" class="venobox" data-gall="gallery-carousel"><img src="{% static 'img/gallery/8.jpg' %}" alt=""></a>
+            {% for image in images %}
+                <a href="{{ image.image.url }}" class="venobox" data-gall="gallery-carousel">
+                    <img src="{{ image.image.url }}" alt="{{ image.description }}">
+                </a>
+            {% endfor %}
         </div>
-  
-      </section>
+    </div>
+</section>
+
+<!-- Image Upload Section -->
+<section id="upload-image">
+    <div class="container">
+        <div class="section-header">
+            <h2>Upload a New Image</h2>
+        </div>
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary">Upload</button>
+                    </div>
+                </form>
+                
+            </div>
+        </div>
+    </div>
+</section>
+
 {% endblock %}
-      
